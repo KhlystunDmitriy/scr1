@@ -1,0 +1,193 @@
+
+/home/dimas/scr1/build/verilator_wf_AHB_IMC/ma_fetch.elf:     формат файла elf32-littleriscv
+
+
+Дизассемблирование раздела .text.init:
+
+00000000 <SIM_EXIT-0xf4>:
+	...
+
+000000f4 <SIM_EXIT>:
+      f4:	00000013          	nop
+
+000000f8 <SIM_STOP>:
+      f8:	0000006f          	j	f8 <SIM_STOP>
+      fc:	ffff                	0xffff
+      fe:	ffff                	0xffff
+	...
+
+000008c0 <trap_vector>:
+     8c0:	34202773          	csrr	a4,mcause
+     8c4:	47ad                	li	a5,11
+     8c6:	02f70763          	beq	a4,a5,8f4 <_report>
+     8ca:	47a1                	li	a5,8
+     8cc:	02f70463          	beq	a4,a5,8f4 <_report>
+     8d0:	47a5                	li	a5,9
+     8d2:	02f70163          	beq	a4,a5,8f4 <_report>
+     8d6:	47ad                	li	a5,11
+     8d8:	00f70e63          	beq	a4,a5,8f4 <_report>
+     8dc:	0000a717          	auipc	a4,0xa
+     8e0:	88870713          	addi	a4,a4,-1912 # a164 <mtvec_handler>
+     8e4:	c311                	beqz	a4,8e8 <trap_vector+0x28>
+     8e6:	8702                	jr	a4
+     8e8:	34202773          	csrr	a4,mcause
+     8ec:	00075363          	bgez	a4,8f2 <handle_exception>
+     8f0:	a009                	j	8f2 <handle_exception>
+
+000008f2 <handle_exception>:
+     8f2:	4505                	li	a0,1
+
+000008f4 <_report>:
+     8f4:	0cd0906f          	j	a1c0 <sc_exit>
+     8f8:	00000013          	nop
+     8fc:	00000013          	nop
+	...
+
+0000a000 <_start>:
+    a000:	f1402573          	csrr	a0,mhartid
+    a004:	e101                	bnez	a0,a004 <_start+0x4>
+    a006:	4e01                	li	t3,0
+    a008:	ffff7297          	auipc	t0,0xffff7
+    a00c:	8b828293          	addi	t0,t0,-1864 # 8c0 <trap_vector>
+    a010:	30529073          	csrw	mtvec,t0
+    a014:	4505                	li	a0,1
+    a016:	057e                	slli	a0,a0,0x1f
+    a018:	00054863          	bltz	a0,a028 <_start+0x28>
+    a01c:	0ff0000f          	fence
+    a020:	85f2                	mv	a1,t3
+    a022:	4501                	li	a0,0
+    a024:	00000073          	ecall
+    a028:	ffff6297          	auipc	t0,0xffff6
+    a02c:	fd828293          	addi	t0,t0,-40 # 0 <CL_SIZE-0x20>
+    a030:	02028063          	beqz	t0,a050 <_start+0x50>
+    a034:	10529073          	csrw	stvec,t0
+    a038:	0000b2b7          	lui	t0,0xb
+    a03c:	10928293          	addi	t0,t0,265 # b109 <__global_pointer$+0x681>
+    a040:	30229073          	csrw	medeleg,t0
+    a044:	30202373          	csrr	t1,medeleg
+    a048:	00628463          	beq	t0,t1,a050 <_start+0x50>
+    a04c:	8a7f606f          	j	8f2 <handle_exception>
+    a050:	30005073          	csrwi	mstatus,0
+    a054:	00002537          	lui	a0,0x2
+    a058:	80050513          	addi	a0,a0,-2048 # 1800 <_report+0xf0c>
+    a05c:	30052073          	csrs	mstatus,a0
+    a060:	00000297          	auipc	t0,0x0
+    a064:	04028293          	addi	t0,t0,64 # a0a0 <_run_test>
+    a068:	34129073          	csrw	mepc,t0
+    a06c:	f1402573          	csrr	a0,mhartid
+    a070:	30200073          	mret
+	...
+
+Дизассемблирование раздела .text:
+
+0000a0a0 <_run_test>:
+    a0a0:	00200e13          	li	t3,2
+    a0a4:	00000313          	li	t1,0
+    a0a8:	00000297          	auipc	t0,0x0
+    a0ac:	00c28293          	addi	t0,t0,12 # a0b4 <_run_test+0x14>
+    a0b0:	00228367          	jalr	t1,2(t0)
+    a0b4:	a011                	j	a0b8 <_run_test+0x18>
+    a0b6:	a019                	j	a0bc <_run_test+0x1c>
+    a0b8:	08c0006f          	j	a144 <fail>
+    a0bc:	00300e13          	li	t3,3
+    a0c0:	00000297          	auipc	t0,0x0
+    a0c4:	00c28293          	addi	t0,t0,12 # a0cc <_run_test+0x2c>
+    a0c8:	00128367          	jalr	t1,1(t0)
+    a0cc:	0080006f          	j	a0d4 <_run_test+0x34>
+    a0d0:	0740006f          	j	a144 <fail>
+    a0d4:	00400e13          	li	t3,4
+    a0d8:	00000313          	li	t1,0
+    a0dc:	00000297          	auipc	t0,0x0
+    a0e0:	00c28293          	addi	t0,t0,12 # a0e8 <_run_test+0x48>
+    a0e4:	00328367          	jalr	t1,3(t0)
+    a0e8:	a011                	j	a0ec <_run_test+0x4c>
+    a0ea:	a019                	j	a0f0 <_run_test+0x50>
+    a0ec:	0580006f          	j	a144 <fail>
+    a0f0:	f0000837          	lui	a6,0xf0000
+    a0f4:	06d00793          	li	a5,109
+    a0f8:	00f80023          	sb	a5,0(a6) # f0000000 <__global_pointer$+0xefff5578>
+    a0fc:	06900793          	li	a5,105
+    a100:	00f80023          	sb	a5,0(a6)
+    a104:	07300793          	li	a5,115
+    a108:	00f80023          	sb	a5,0(a6)
+    a10c:	06100793          	li	a5,97
+    a110:	00f80023          	sb	a5,0(a6)
+    a114:	06c00793          	li	a5,108
+    a118:	00f80023          	sb	a5,0(a6)
+    a11c:	06900793          	li	a5,105
+    a120:	00f80023          	sb	a5,0(a6)
+    a124:	06700793          	li	a5,103
+    a128:	00f80023          	sb	a5,0(a6)
+    a12c:	06e00793          	li	a5,110
+    a130:	00f80023          	sb	a5,0(a6)
+    a134:	00a00793          	li	a5,10
+    a138:	00f80023          	sb	a5,0(a6)
+    a13c:	0180006f          	j	a154 <pass>
+    a140:	01c01a63          	bne	zero,t3,a154 <pass>
+
+0000a144 <fail>:
+    a144:	0ff0000f          	fence
+    a148:	000e0593          	mv	a1,t3
+    a14c:	00100513          	li	a0,1
+    a150:	00000073          	ecall
+
+0000a154 <pass>:
+    a154:	0ff0000f          	fence
+    a158:	000e0593          	mv	a1,t3
+    a15c:	00000513          	li	a0,0
+    a160:	00000073          	ecall
+
+0000a164 <mtvec_handler>:
+    a164:	00200513          	li	a0,2
+    a168:	00ae0863          	beq	t3,a0,a178 <mtvec_handler+0x14>
+    a16c:	00400513          	li	a0,4
+    a170:	00ae0463          	beq	t3,a0,a178 <mtvec_handler+0x14>
+    a174:	fd1ff06f          	j	a144 <fail>
+    a178:	fc0316e3          	bnez	t1,a144 <fail>
+    a17c:	00000593          	li	a1,0
+    a180:	34202573          	csrr	a0,mcause
+    a184:	fcb510e3          	bne	a0,a1,a144 <fail>
+    a188:	341025f3          	csrr	a1,mepc
+    a18c:	ffc28293          	addi	t0,t0,-4
+    a190:	fab29ae3          	bne	t0,a1,a144 <fail>
+    a194:	00c58593          	addi	a1,a1,12
+    a198:	34159073          	csrw	mepc,a1
+    a19c:	30200073          	mret
+
+0000a1a0 <ecall>:
+    a1a0:	00000073          	ecall
+	...
+
+0000a1c0 <sc_exit>:
+    a1c0:	f35f506f          	j	f4 <SIM_EXIT>
+    a1c4:	00000013          	nop
+    a1c8:	00000013          	nop
+    a1cc:	00000013          	nop
+    a1d0:	00000013          	nop
+    a1d4:	00000013          	nop
+    a1d8:	00000013          	nop
+    a1dc:	00000013          	nop
+	...
+
+Дизассемблирование раздела .data:
+
+0000a200 <begin_regstate>:
+	...
+
+Дизассемблирование раздела .tohost:
+
+0000a240 <tohost>:
+	...
+
+0000a280 <fromhost>:
+	...
+
+Дизассемблирование раздела .sdata:
+
+0000a288 <__global_pointer$-0x800>:
+	...
+
+Дизассемблирование раздела .stack:
+
+0000fc00 <.stack>:
+	...

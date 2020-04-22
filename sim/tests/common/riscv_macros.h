@@ -9,6 +9,10 @@
 //-----------------------------------------------------------------------
 // Begin Macro
 //-----------------------------------------------------------------------
+#define SC_SIM_OUTPORT (0xf0000000)
+#define RVTEST_PUTCHAR(c)\
+li a5,(c);\
+sb a5,0(a6);
 
 #define RVTEST_RV64U                                                    \
   .macro init;                                                          \
@@ -103,13 +107,15 @@
 
 #define RVTEST_CODE_BEGIN                                               \
         .section .text.init;                                            \
-        .org 0xC0, 0x00;                                                \
+        .org 0x00, 0x00;                                                \
         .align  6;                                                      \
         .weak stvec_handler;                                            \
         .weak mtvec_handler;                                            \
 trap_vector:                                                            \
         /* test whether the test came from pass/fail */                 \
-        csrr a4, mcause;                                                \
+        csrr a4, mcause;\
+	li a5, CAUSE_MACHINE_ECALL;\
+        beq a4, a5, _report; \
         li a5, CAUSE_USER_ECALL;                                        \
         beq a4, a5, _report;                                            \
         li a5, CAUSE_SUPERVISOR_ECALL;                                  \
@@ -133,6 +139,7 @@ _report:                                                                \
         j sc_exit;                                                      \
         .align  6;                                                      \
         .globl _start;                                                  \
+	.org 0x97B4;\
 _start:                                                                 \
         RISCV_MULTICORE_DISABLE;                                        \
         /*INIT_SPTBR;*/                                                 \
