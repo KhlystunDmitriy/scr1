@@ -1,0 +1,55 @@
+[*]
+[*] GTKWave Analyzer v3.3.66 (w)1999-2015 BSI
+[*] Thu May 21 20:24:55 2020
+[*]
+[dumpfile] "/home/dimas/scr1/build/verilator_wf_AHB_IMC/simx.vcd"
+[dumpfile_mtime] "Thu May 21 19:39:31 2020"
+[dumpfile_size] 443592535
+[savefile] "/home/dimas/Рабочий стол/sfhsousbsd.gtkw"
+[timestart] 435
+[size] 1295 744
+[pos] -296 -117
+*-4.000000 482 442 472 482 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[markername] AFetch
+[markername] BDecode
+[markername] CExecute
+[treeopen] scr1_top_tb_ahb.
+[treeopen] scr1_top_tb_ahb.i_top.
+[treeopen] scr1_top_tb_ahb.i_top.i_core_top.
+[treeopen] scr1_top_tb_ahb.i_top.i_core_top.i_clk_ctrl.
+[treeopen] scr1_top_tb_ahb.i_top.i_core_top.i_dm.
+[treeopen] scr1_top_tb_ahb.i_top.i_core_top.i_pipe_top.
+[treeopen] scr1_top_tb_ahb.i_top.i_core_top.i_pipe_top.i_pipe_exu.
+[treeopen] scr1_top_tb_ahb.i_top.i_core_top.i_scu.
+[treeopen] scr1_top_tb_ahb.i_top.i_core_top.i_tapc.
+[sst_width] 225
+[signals_width] 214
+[sst_expanded] 1
+[sst_vpaned_height] 354
+@28
+scr1_top_tb_ahb.i_top.i_core_top.i_pipe_top.clk
+@22
+scr1_top_tb_ahb.i_top.i_core_top.i_pipe_top.curr_pc[31:0]
+@28
+scr1_top_tb_ahb.i_top.i_core_top.i_pipe_top.imem_req
+@22
+scr1_top_tb_ahb.i_top.i_core_top.i_pipe_top.imem_addr[31:0]
+@28
+scr1_top_tb_ahb.i_top.i_core_top.i_pipe_top.imem_resp[1:0]
+@22
+scr1_top_tb_ahb.i_top.i_core_top.i_pipe_top.imem_rdata[31:0]
+scr1_top_tb_ahb.i_top.i_core_top.i_pipe_top.exu2mprf_rs2_addr[4:0]
+scr1_top_tb_ahb.i_top.i_core_top.i_pipe_top.exu2mprf_rs1_addr[4:0]
+scr1_top_tb_ahb.i_top.i_core_top.i_pipe_top.mprf2exu_rs1_data[31:0]
+scr1_top_tb_ahb.i_top.i_core_top.i_pipe_top.mprf2exu_rs2_data[31:0]
+@28
+scr1_top_tb_ahb.i_top.i_core_top.i_pipe_top.idu2exu_use_rs1
+scr1_top_tb_ahb.i_top.i_core_top.i_pipe_top.idu2exu_use_rs2
+scr1_top_tb_ahb.i_top.i_core_top.i_pipe_top.idu2exu_use_rd
+@22
+scr1_top_tb_ahb.i_top.i_core_top.i_pipe_top.i_pipe_exu.i_ialu.ialu_sum2_res[31:0]
+scr1_top_tb_ahb.i_top.i_core_top.i_pipe_top.i_pipe_exu.i_ialu.ialu_sum2_op1[31:0]
+scr1_top_tb_ahb.i_top.i_core_top.i_pipe_top.i_pipe_exu.i_ialu.ialu_sum2_op2[31:0]
+scr1_top_tb_ahb.i_top.i_core_top.i_pipe_top.i_pipe_idu.instr[31:0]
+[pattern_trace] 1
+[pattern_trace] 0
