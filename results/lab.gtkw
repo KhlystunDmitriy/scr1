@@ -2,10 +2,10 @@
 [*] GTKWave Analyzer v3.3.66 (w)1999-2015 BSI
 [*] Thu May 21 20:24:55 2020
 [*]
-[dumpfile] "/home/dimas/scr1/build/verilator_wf_AHB_IMC/simx.vcd"
+[dumpfile] ".\simx.vcd"
 [dumpfile_mtime] "Thu May 21 19:39:31 2020"
 [dumpfile_size] 443592535
-[savefile] "/home/dimas/Рабочий стол/sfhsousbsd.gtkw"
+[savefile] ".\sfhsousbsd.gtkw"
 [timestart] 435
 [size] 1295 744
 [pos] -296 -117
